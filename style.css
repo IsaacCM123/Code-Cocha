@@ -1,68 +1,91 @@
-*{
-	margin: 0;
-	padding: 0;
-}
-body{
-	background:#05041b;
-}
-.img1{
-	width: 80vw;
-	height: 70vh;
-	margin: auto;
-}
-.img1 img{
-	width: 100%;
-	height: 100%;
-}
-.img2{
-	margin: auto;
-	width: 60vw;
-	height: 70vh;
-}
-.img2 img{
-	width: 100%;
-	height: 100%;
-}
-#lista{
-	width:50vw;
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#05041b;}
+
+.contenedorLogo{
+	position:relative;
+	width:80vw;
+	height:70vh;
 	margin:auto;
+	margin-top:2em;
+	margin-bottom:2em;}
+
+.logoEmpresa{
+	position:absolute;
+	width:100%;
+	height:100%;}
+
+.engranage1{
+	position:absolute;
+	left:39%;
+	top:23.2%;
+	width:250px;
+	height:250px;
+	animation:rotar 10s linear infinite;}
+	@keyframes rotar{from{transform:rotate(0deg);}to{transform:rotate(150deg);}}
+
+.engranage2{
+	position:absolute;
+	top:1%;
+	right:27%;
+	z-index:-10;
+	width:150px;
+	height:150px;
+	animation:rotar1 10s linear infinite;}
+	@keyframes rotar1{from{transform:rotate(0deg);}to{transform:rotate(150deg);}}
+
+.contenedorIMG2{
+	margin:auto;
+	width:60vw;
+	height:70vh;}
+
+.contenedorIMG2 img{
+	width:100%;
+	height:100%;}
+
+#lista{
+	border:1px solid cyan;
+	padding:1em;
+	width:fit-content;
+	margin:auto;
+	margin-top:2em;
+	margin-bottom:2em;
 	display:flex;
-	flex-direction:column;
-}
+	flex-direction:column;}
+
 #lista a{
 	text-decoration:none;
 	color:#fff;
-	font-size:1.5vw;
-}
+	font-size:1.5vw;}
 
+
+/*...........................................Movil...........................................*/
 @media(max-width:790px){
-body{
-	background:#05041b;
-}
-.img1{
-	width: 95vw;
-	height: 23vh;
-	margin: 2em auto;
-}
-.img1 img{
-	width: 100%;
-	height: 100%;
-}
-.img2{
-	margin: auto;
-	width: 90vw;
-	height: 30vh;
-}
-.img2 img{
-	width: 100%;
-	height: 100%;
-}
 
-#lista{
-	border:2px solid #fff;
-	border-radius:1em;
-	padding:0.5em;
-	width:80vw;
-	margin:2em auto;}
-#lista a{font-size:1.3em;}
+.contenedorLogo{
+	width:18em;
+	height:9em;}
+
+.engranage1{
+	top:24.5%;
+	width:4.5em;
+	height:4.5em;}
+
+.engranage2{
+	width:2.5em;
+	height:2.5em;}
+
+.contenedorIMG2{
+	width:15em;
+	height:15em;}
+
+.contenedorIMG2 img{
+	width: 100%;
+	height: 100%;}
+
+#lista{background:#3080a4;}
+
+#lista a{
+	text-decoration:none;
+	color:#fff;
+	font-size:1em;}
 }
