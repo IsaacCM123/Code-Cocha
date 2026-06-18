@@ -306,15 +306,16 @@ body{
   height:160px;
   margin-bottom:1em;}
 
-  #swipe-hint { display: flex; }
-  .card { padding: 28px 22px; min-height: 600px; width: 95vw; }/*Aqui definimos el tamaño de las targetas*/
+  #swipe-hint {display:flex;left:25px;bottom: 60px;}/*Es la referncia a los usuarios de deslizar hacia arriba (icono del mouse)*/
+  .card {padding:28px 22px;min-height:400px;width:90vw;top:40px;}/*Aqui definimos el tamaño de las targetas*/
   .card.active { transform: scale(0.96) translateZ(0); }
-  .card h1 { font-size: 1.65rem; }
-  .card p  { font-size: 0.92rem; }
+  .card h1{font-size:1.65rem;}
+  .card p{font-size:0.92rem;}
 
   #ai-figure {/*En esta seccion hacemos los ajustes de la imagen IA .png*/
-    width: 350px;/*En esta seccion hacemos los ajustes de la imagen IA .png*/
-    left: auto;/*En esta seccion hacemos los ajustes de la imagen IA .png*/
-    right: -150px;/*En esta seccion hacemos los ajustes de la imagen IA .png*/
+    width:300px;/*En esta seccion hacemos los ajustes de la imagen IA .png*/
+    left:auto;/*En esta seccion hacemos los ajustes de la imagen IA .png*/
+    right:-100px;/*En esta seccion hacemos los ajustes de la imagen IA .png*/
+    bottom:100px;
   }
 }
