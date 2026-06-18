@@ -1,0 +1,320 @@
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  letter-spacing:0.2em;}
+
+:root {
+  --void:           #00000f;
+  --cyan:           #00f5ff;
+  --violet:         #7b2fff;
+  --magenta:        #ff2d78;
+  --white:          #e8eaf6;
+  --card-glass:     rgba(10, 10, 40, 0.72);
+  --card-border:    rgba(0, 245, 255, 0.18);
+  --font-display:   'Montserrat', monospace;
+  --font-body:      'Montserrat', sans-serif;}
+
+html,
+body{
+  width:100%;
+  height:100%;
+  overflow:hidden;/*oculta cualquier contenido que exceda o desborde fuera de los límites (alto y ancho) de su elemento*/
+  background:var(--void);
+  color:var(--white);
+  font-family:var(--font-body);
+  cursor:default;}
+
+/* CANVAS */
+#cosmos{/*elemento donde se dibuja el campo de estrellas animado (el fondo cósmico que ves moviéndose).*/
+  position:fixed;
+  inset:0;/*Actúa como si escribieras top: 0; right: 0; bottom: 0; left: 0;en una sola línea.*/
+  z-index:0;}
+
+/* TUNNEL */
+#tunnel{/*Perspectiva 3D que envuelve a las nebulosas y le da al fondo cósmico, sensación de profundidad tridimensional.*/
+  position:fixed;inset:0;z-index:1;
+  perspective:900px;perspective-origin:50% 50%;
+  overflow:hidden;}
+
+#tunnel-inner{/*Contenido que vive dentro de ese espacio y se anima (zoom) cada vez que navegas entre secciones, reforzando la sensación de avanzar a través del cosmos.*/
+  position:absolute;inset:0;
+  transform-style:preserve-3d;
+  will-change:transform;}
+
+/* NEBULAE */
+.nebula-layer{/*Clase compartida que crea las manchas nebulosas, que flotan en el fondo, dándole esa atmósfera cósmica-futurista*/
+  position:absolute;inset:-30%;/*Da un efecto sombrio a los bordes del body*/
+  border-radius:50%;filter:blur(90px);/*Un efecto de ofuscado*/
+  pointer-events:none;}
+
+/*Son los 3 IDs que le dan color y movimiento propio a cada una de las nebulosas*/
+#neb1 { background: radial-gradient(ellipse at 30% 60%, rgba(123,47,255,0.35) 0%, transparent 65%); animation: nebDrift1 18s ease-in-out infinite alternate; }
+#neb2 { background: radial-gradient(ellipse at 70% 30%, rgba(255,45,120,0.22) 0%, transparent 60%); animation: nebDrift2 22s ease-in-out infinite alternate; }
+#neb3 { background: radial-gradient(ellipse at 50% 80%, rgba(0,245,255,0.15) 0%, transparent 55%); animation: nebDrift3 15s ease-in-out infinite alternate; }
+@keyframes nebDrift1 { from{transform:translate(0,0) scale(1)} to{transform:translate(4%,6%) scale(1.08)} }
+@keyframes nebDrift2 { from{transform:translate(0,0) scale(1)} to{transform:translate(-6%,-3%) scale(1.06)} }
+@keyframes nebDrift3 { from{transform:translate(0,0) scale(1)} to{transform:translate(3%,-5%) scale(1.1)} }
+
+/* GRID */
+#grid-overlay{/*crea la cuadrícula tipo "rejilla holográfica" que ves de fondo.*/
+  position:fixed;inset:0;z-index:2;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,245,255,0.04)1px,transparent 1px),
+    linear-gradient(90deg, rgba(0,245,255,0.04)1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);}
+
+/* RINGS */
+#rings {
+  position: fixed; inset: 0; z-index: 2; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.ring {
+  position:absolute;border-radius:50%;
+  border:1px solid rgba(0,245,255,0.08);
+  animation:ringPulse var(--dur,8s)linear infinite;opacity:0;}
+
+@keyframes ringPulse {
+  0%  { transform: scale(0.1); opacity: 0; }
+  20% { opacity: 0.6; }
+  80% { opacity: 0.3; }
+  100%{ transform: scale(2.5); opacity: 0; }
+}
+
+/* ---- AI IMAGE — Nuestra Imagen IA ---- */
+#ai-figure {
+  position:fixed;
+  right:-10px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:100;
+  width:clamp(260px, 32vw, 440px);
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.8s ease;}
+
+#ai-figure.visible{opacity:1;}
+
+#ai-figure img{
+  width:100%;
+  display:block;}
+
+/* HERO */
+#hero{/*Es el contenido de la pagina principal*/
+  position:fixed;inset:0;z-index:10;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:0 24px;
+  pointer-events:none;
+  transition:opacity 0.6s,transform 0.6s;}
+
+#hero.hidden {opacity:0;transform:scale(1.1);pointer-events:none;}
+
+.hero-eyebrow{/*Bienvenido! a nuestra plataforma*/
+  font-family:var(--font-display);font-size:0.8rem;
+  letter-spacing: 0.35em; color: var(--cyan);
+  text-transform: uppercase; margin-bottom: 20px;
+  opacity: 0; animation: fadeUp 0.9s 0.3s forwards;}
+
+.hero-title {/*Construimos*/
+  font-family: var(--font-display);/*Construimos*/
+  font-size: clamp(1.4rem, 3vw, 4.5rem);/*Construimos*/
+  font-weight: 900; line-height: 1.05;/*Construimos*/
+  margin-bottom: 24px;/*Construimos*/
+  opacity: 0; animation: fadeUp 0.9s 0.6s forwards;/*Construimos*/
+  color:#ed74de;}
+
+.hero-title .line2{color:var(--violet);display:block;}/*Soluciones*/
+.hero-title .line3 {/*Digitales*/
+  background: linear-gradient(90deg, var(--cyan), var(--magenta));/*Digitales*/
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;/*Digitales*/
+  background-clip: text; display: block;/*Digitales*/
+}/*Digitales*/
+
+.cocha{/*Imagen de Code-Cocha*/
+  width:450px;
+  height:200px;
+  margin-bottom:1em;}
+
+.hero-sub{
+  font-size:clamp(0.85rem, 2vw, 1.05rem);font-weight:300;
+  color:rgba(232,234,246,1);max-width:520px;line-height:1.7;
+  margin-bottom:40px;
+  opacity:0;animation:fadeUp 0.9s 0.9s forwards;}
+
+.scroll-hint {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: fadeUp 0.9s 1.3s forwards; pointer-events: none;
+}
+.scroll-hint span {
+  font-family: var(--font-display); font-size: 0.55rem;
+  letter-spacing: 0.22em; color: rgba(0,245,255,0.5); text-transform: uppercase;
+}
+.scroll-arrow {
+  width: 1px; height: 40px;
+  background: linear-gradient(180deg, rgba(0,245,255,0.6), transparent);
+  animation: arrowBounce 2s ease-in-out infinite;
+}
+@keyframes arrowBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* CARDS STAGE Estas son las targetas......*/
+#cards-stage {/*Solamente es el CONTENEDOR*/
+  position: fixed; inset: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;}
+
+/* CARD — aparece desde muy pequeño hasta tamaño mediano */
+.card {
+  position: absolute;
+  width: min(520px, 82vw);
+  min-height: 360px;
+  border-radius: 20px;
+  overflow:hidden;
+  background: var(--card-glass);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  box-shadow:
+    0 0 0 1px rgba(0,245,255,0.06),
+    0 8px 60px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(255,255,255,0.07);
+  display: flex; flex-direction: column; justify-content:center;/*posicion del contenido de  las targetas (arriba)*/
+  padding: 36px;
+  /* START: tiny + invisible */
+  opacity: 0;/*Estado inicial: la tarjeta empieza completamente invisible*/
+  transform: scale(0.08) translateZ(-100px);/*la tarjeta empieza extremadamente pequeña 2% de su tamaño real y "alejada" en el eje Z (-100px)*/
+  transition:
+    opacity 3s cubic-bezier(0.22,1,0.36,1),/*La velocidad en la que aparecen las targetas del fondo 3s*/
+    transform 3s cubic-bezier(0.22,1,0.36,1);/*La velocidad en la que aparecen las targetas del fondo 3s*/
+  pointer-events: none;}
+
+/* ACTIVE: grows to medium size (not full 1.0) */
+.card.active {
+  opacity: 1;
+  transform: scale(0.9) translateZ(0);
+  pointer-events: auto;}
+
+/*Este bloque define el estado de salida de la tarjeta — lo que pasa cuando avanzas a la siguiente sección y la tarjeta actual tiene que desaparecer.*/
+.card.exit {
+  opacity: 0;/*La tarjeta se vuelve completamente invisible (se desvanece)*/
+  transform: scale(1.35) translateZ(120px);/*La tarjeta crece a 115% de su tamaño normal y se acerca hacia la "cámara" en el eje Z(120px)*/
+  transition:/*Como si pasara volando junto a ti y te dejara atrás, en lugar de simplemente encogerse hacia el fondo*/
+    opacity 0.25s ease-in,
+    transform 0.25s ease-in;}
+
+.card-bg {/*Son las imagenes de fondo........*/
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center; z-index: 0;
+  transition: transform 6s ease;
+}
+.card:hover .card-bg { transform: scale(1.04); }
+
+.card-overlay {/*Define una capa oscura semitransparente que se coloca encima de la imagen de fondo de cada tarjeta*/
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(160deg, rgba(0,0,20,0.15) 0%, rgba(0,0,20,0.55) 40%, rgba(0,0,20,0.88) 100%);
+}
+.card-content {position: relative; z-index: 2; }/*Este bloque contiene toda la informacion de las targetas*/
+
+.card h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 900; letter-spacing: 0.04em;
+  margin-bottom: 14px; line-height: 1.1;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+}
+.card p {
+  font-size: 1rem; font-weight: 500; line-height: 1.7;
+  color: #fff; margin-bottom: 24px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.7);
+}
+
+/*Iconos de mis trabajos IEP, Copacabana, Tienda-Online, CV*/
+.trabajos{margin-top:2em;}
+
+.trabajos a{
+  color:#fff;
+  display:block;
+  font-size:1em;
+  text-decoration:none;}
+
+.trabajos a ion-icon{font-size:2em;}
+
+
+.card-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 11px 26px; border-radius: 999px;
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  color: #fff; font-family: var(--font-display);
+  font-size: 1rem; font-weight: 400; letter-spacing: 0.1em;
+  text-transform: uppercase; text-decoration: none; border: none;
+  cursor: pointer;
+  transition: box-shadow 0.3s, transform 0.2s;
+  box-shadow: 0 4px 24px rgba(123,47,255,0.4);
+}
+.card-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(0,245,255,0.5); }
+.card-btn svg { width: 14px; height: 14px; }
+
+.card-1 h1 { color: var(--cyan); }
+.card-2 h1 { color: #a78bff; }
+.card-3 h1 { color: var(--magenta); }
+.card-4 h1 { color: #ffd166; }
+.card-5 h1 { color: var(--cyan); }
+
+.card-1 .card-bg { background-image: url('https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=900&q=80'); }
+.card-2 .card-bg { background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80'); }
+.card-3 .card-bg { background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80'); }
+.card-4 .card-bg { background-image: url('https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=900&q=80'); }
+.card-5 .card-bg { background-image: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=80'); }
+
+/* FLASH */
+#flash {
+  position: fixed; inset: 0; z-index: 50; pointer-events: none;
+  background: radial-gradient(circle, rgba(0,245,255,0.08) 0%, transparent 70%);
+  opacity: 0; transition: opacity 0.15s;
+}
+#flash.show { opacity: 1; }
+
+/* MOBILE SWIPE HINT */
+#swipe-hint {
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+  z-index: 100; display: none; flex-direction: column; align-items: center; gap: 6px;
+  opacity: 0; animation: fadeUp 1s 1.5s forwards;
+}
+#swipe-hint span {
+  font-family: var(--font-display); font-size: 0.5rem;
+  letter-spacing: 0.22em; color: rgba(0,245,255,0.4); text-transform: uppercase;
+}
+.swipe-icon {
+  width: 28px; height: 44px; border-radius: 14px;
+  border: 1.5px solid rgba(0,245,255,0.3);
+  display: flex; align-items: flex-start; justify-content: center; padding-top: 6px;
+}
+.swipe-dot-mobile {
+  width: 4px; height: 10px; border-radius: 2px; background: var(--cyan);
+  animation: swipeBounce 2s ease-in-out infinite;
+}
+@keyframes swipeBounce { 0%,100%{transform:translateY(0);opacity:1} 80%{transform:translateY(14px);opacity:0.2} }
+
+@media (max-width: 600px) {
+  .cocha{/*Imagen de Code-Cocha*/
+  width:350px;
+  height:160px;
+  margin-bottom:1em;}
+
+  #swipe-hint { display: flex; }
+  .card { padding: 28px 22px; min-height: 600px; width: 95vw; }/*Aqui definimos el tamaño de las targetas*/
+  .card.active { transform: scale(0.96) translateZ(0); }
+  .card h1 { font-size: 1.65rem; }
+  .card p  { font-size: 0.92rem; }
+
+  #ai-figure {/*En esta seccion hacemos los ajustes de la imagen IA .png*/
+    width: 350px;/*En esta seccion hacemos los ajustes de la imagen IA .png*/
+    left: auto;/*En esta seccion hacemos los ajustes de la imagen IA .png*/
+    right: -150px;/*En esta seccion hacemos los ajustes de la imagen IA .png*/
+  }
+}

@@ -1,31 +1,124 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Code Cocha</title>
+<html lang="es">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Desarrollo Web</title>
+      <link rel="stylesheet" href="assets/style.css">
 
-	<link rel="stylesheet" href="style.css">
-</head>
+      <!--Estilo de texto Montserrat-->
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit&display=swap"rel="stylesheet">
+    </head>
 <body>
-	<div class="contenedorLogo">
-		<img class="logoEmpresa" src="./img/partes/1.png">
-		<img class="engranage1" src="./img/partes/2.png">
-		<img class="engranage2" src="./img/partes/3.png">
-	</div>
 
-	<div class="contenedorIMG2">
-		<img src="./img/2.png">
-	</div>
-	<div id="lista">
-		<a href="https://isaaccm.onrender.com"><ion-icon name="home"></ion-icon> Hospedaje Copacabana</a>
-		<a href="https://resilient-puppy-c9cbfa.netlify.app/"><ion-icon name="bonfire-sharp"></ion-icon> Iglesia Evangelica Pentecostal</a>
-		<a href="https://tiendaonline-t2td.onrender.com"><ion-icon name="storefront-sharp"></ion-icon> Tienda de Barrio</a>
-		<a href="https://gilded-bublanina-679022.netlify.app/"><ion-icon name="document-attach-outline"></ion-icon> Hojas De Vida (C.V.C.) Digital</a>
-	</div>
+  <canvas id="cosmos"></canvas>
+
+  <div id="tunnel">
+    <div id="tunnel-inner">
+      <div class="nebula-layer" id="neb1"></div>
+      <div class="nebula-layer" id="neb2"></div>
+      <div class="nebula-layer" id="neb3"></div>
+    </div>
+  </div>
+
+  <div id="grid-overlay"></div>
+  <div id="rings"></div>
+
+  <!-- AI 3D Figure — replaces the dots -->
+  <div id="ai-figure">
+    <img src="./img/ia.png" alt="AI Figure" />
+  </div>
+
+  <!-- Hero -->
+  <section id="hero">
+    <p class="hero-eyebrow">Bienvenido a nuestra plataforma</p>
+    <h1 class="hero-title">
+      <span>Construimos</span>
+      <span class="line2">Soluciones</span>
+      <span class="line3">Digitales</span>
+    </h1>
+    <img class="cocha"src="./img/logo.png">
+    <p class="hero-sub">Plataformas, sistemas y experiencias que conectan la lógica empresarial con la velocidad del cosmos.</p>
+    <div class="scroll-hint">
+      <span>Scroll para explorar</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <div id="flash"></div>
+
+  <!-- Cards -->
+  <div id="cards-stage">
+
+    <div class="card card-1">
+      <div class="card-bg"></div>
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <h1>Nosotros</h1>
+        <p>Somos una empresa de software con plataformas de sistemas de automatización que conectan la lógica empresarial con la velocidad del cosmos digital.</p>
+      </div>
+    </div>
+
+    <div class="card card-2">
+      <div class="card-bg"></div>
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <h1>Servicios</h1>
+        <p>DevOps que conecta el desarrollo y las operaciones para optimizar la entrega de software, automatizar flujos y garantizar rendimiento uniforme en todo entorno.</p>
+        <a href="#" class="card-btn">
+          Ver servicios
+        </a>
+      </div>
+    </div>
+
+    <div class="card card-3">
+      <div class="card-bg"></div>
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <h1>Portafolio</h1>
+        <p>Nuestros clientes que confiaron en nosotros trabajan conformes y satisfechos con los resultados que transformaron sus negocios.</p>
+        <a href="#" class="card-btn">
+          Ver proyectos
+        </a>
+        <div class="trabajos">
+          <a href="https://isaaccm.onrender.com"><ion-icon name="home"></ion-icon> Hospedaje Copacabana</a>
+          <a href="https://resilient-puppy-c9cbfa.netlify.app/"><ion-icon name="bonfire-sharp"></ion-icon> I.E.P.</a>
+          <a href="https://tiendaonline-t2td.onrender.com"><ion-icon name="storefront-sharp"></ion-icon> Tienda de Barrio</a>
+          <a href="https://gilded-bublanina-679022.netlify.app/"><ion-icon name="document-attach-outline"></ion-icon> Hojas De Vida Digital</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-4">
+      <div class="card-bg"></div>
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <h1>Comunidad</h1>
+        <p>Publicamos artículos, tutoriales y noticias sobre tecnología y desarrollo. Únete a nuestra red de creadores e innovadores digitales.</p>
+      </div>
+    </div>
+
+    <div class="card card-5">
+      <div class="card-bg"></div>
+      <div class="card-overlay"></div>
+      <div class="card-content">
+        <h1>Contacto</h1>
+        <p>Contáctate con nosotros. Estamos listos para llevar tu próximo proyecto al siguiente nivel del universo digital.</p>
+        <a href="mailto:hola@nexacode.dev" class="card-btn">
+          Escríbenos
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Mobile swipe hint -->
+  <div id="swipe-hint">
+    <div class="swipe-icon"><div class="swipe-dot-mobile"></div></div>
+    <span>Desliza para explorar</span>
+  </div>
+
+  <script type="module"src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script src="assets/script.js"></script>
 </body>
-
-
-<script type="module"src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script src="script.js"></script>
 </html>
