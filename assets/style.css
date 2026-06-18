@@ -337,7 +337,7 @@ body{
 
 /*NUESTRO LOGO DE  LA EMPRESA CODE-COCHA........................................Inicio*/
 .cocha-contenedor{
-  width:360px;
+  width:350px;
   height:170px;}
 
 .engranage1{
@@ -352,44 +352,8 @@ body{
 .cocha{/*Imagen de Code-Cocha*/}
 /*NUESTRO LOGO DE  LA EMPRESA CODE-COCHA........................................Final*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#grid-overlay{display:none;}
+#rings{display:none;}
 
   .scroll-hint{display:none;}/*Quitamos la guia para el usuario (Scroll para explorar)*/
 
