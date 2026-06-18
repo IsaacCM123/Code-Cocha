@@ -85,7 +85,7 @@ body{
   100%{ transform: scale(2.5); opacity: 0; }
 }
 
-/* ---- AI IMAGE — Nuestra Imagen IA ---- */
+/* ---- AI IMAGE — Nuestra Imagen IA ----...............INICIO */
 #ai-figure {
   position:fixed;
   right:-10px;
@@ -102,6 +102,8 @@ body{
 #ai-figure img{
   width:100%;
   display:block;}
+/* ---- AI IMAGE — Nuestra Imagen IA ----.................FINAL */
+
 
 /* HERO */
 #hero{/*Es el contenido de la pagina principal*/
@@ -135,10 +137,38 @@ body{
   background-clip: text; display: block;/*Digitales*/
 }/*Digitales*/
 
-.cocha{/*Imagen de Code-Cocha*/
-  width:450px;
+
+/*NUESTRO LOGO DE  LA EMPRESA CODE-COCHA........................................Inicio*/
+.cocha-contenedor{
+  position:relative;
+  width:460px;
   height:200px;
   margin-bottom:1em;}
+
+.engranage1{
+  position:absolute;
+  width:105px;
+  height:105px;
+  top:25%;
+  left:40%;
+  animation:rotar1 20s linear infinite;}
+  @keyframes rotar1{to{transform:rotate(400deg);}}/*PODEMOS HACERLO DE ESTA MANERA (SIMPLIFICADO)*/
+
+.engranage2{
+  position:absolute;
+  width:55px;
+  height:55px;
+  top:1%;
+  left:60%;
+  z-index:-10;
+  animation:rotar2 20s linear infinite;}
+  @keyframes rotar2{from{transform:rotate(0deg);}to{transform:rotate(480deg);}}
+
+.cocha{/*Imagen de Code-Cocha*/
+  width:100%;
+  height:100%;}
+/*NUESTRO LOGO DE  LA EMPRESA CODE-COCHA........................................Final*/
+
 
 .hero-sub{
   font-size:clamp(0.85rem, 2vw, 1.05rem);font-weight:300;
@@ -146,7 +176,8 @@ body{
   margin-bottom:40px;
   opacity:0;animation:fadeUp 0.9s 0.9s forwards;}
 
-.scroll-hint {
+/*TODO ESTO PERTENECE AL USUARIO DE GUIA DONDE DICE: (SCROLL PARA EXPLORAR) INICIO.........................................*/
+.scroll-hint{
   display: flex; flex-direction: column; align-items: center; gap: 8px;
   opacity: 0; animation: fadeUp 0.9s 1.3s forwards; pointer-events: none;
 }
@@ -161,6 +192,8 @@ body{
 }
 @keyframes arrowBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
 @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+/*TODO ESTO PERTENECE AL USUARIO DE GUIA DONDE DICE: (SCROLL PARA EXPLORAR) FINAL...........................................*/
+
 
 /* CARDS STAGE Estas son las targetas......*/
 #cards-stage {/*Solamente es el CONTENEDOR*/
@@ -301,10 +334,64 @@ body{
 @keyframes swipeBounce { 0%,100%{transform:translateY(0);opacity:1} 80%{transform:translateY(14px);opacity:0.2} }
 
 @media (max-width: 600px) {
-  .cocha{/*Imagen de Code-Cocha*/
-  width:350px;
-  height:160px;
-  margin-bottom:1em;}
+
+/*NUESTRO LOGO DE  LA EMPRESA CODE-COCHA........................................Inicio*/
+.cocha-contenedor{
+  width:360px;
+  height:170px;}
+
+.engranage1{
+  width:89px;
+  height:89px;}
+
+.engranage2{
+  width:50px;
+  height:50px;
+  top:0%;}
+
+.cocha{/*Imagen de Code-Cocha*/}
+/*NUESTRO LOGO DE  LA EMPRESA CODE-COCHA........................................Final*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .scroll-hint{display:none;}/*Quitamos la guia para el usuario (Scroll para explorar)*/
 
   #swipe-hint {display:flex;left:25px;bottom: 60px;}/*Es la referncia a los usuarios de deslizar hacia arriba (icono del mouse)*/
   .card {padding:28px 22px;min-height:400px;width:90vw;top:40px;}/*Aqui definimos el tamaño de las targetas*/
